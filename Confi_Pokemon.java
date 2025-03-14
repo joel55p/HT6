@@ -19,7 +19,13 @@ public class Confi_Pokemon {
     /*------- Operacion 4 --------- */
     public List<Pokemon> getAllPokemonByType() { /*da el orden de todos los pokemones en el csv */
         List<Pokemon> list = new ArrayList<>(pokedex.values());
-        list.sort(Comparator.comparing(Pokemon::getType1)); /*se habia puesto con[2] pero hace al programa mas sensible es mejor por getType por eso tambien se cre clase Pokemon */
+        /*aqui se define el orden ascendente  */
+        List<String> typeOrder = Arrays.asList("Water", "Steel", "Rock", "Psychic", "Poison","Normal", "Ice", "Ground", "Grass", "Ghost","Flying", "Fire", "Fighting", "Fairy", "Electric", "Dragon", "Dark", "Bug" );
+    
+        /*se ordena segun la lista predefinida */
+    
+        list.sort(Comparator.comparing(p -> typeOrder.indexOf(p.getType1()))); //Chatgpt(2025)
+    
         return list;
     }
 

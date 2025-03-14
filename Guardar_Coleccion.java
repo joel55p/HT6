@@ -25,8 +25,16 @@ public class Guardar_Coleccion { /*clase qeu va a servir para guardar una colecc
 
     /*------ Operacion 3------- */
     public List<Pokemon> getUserCollectionByType() {
-        List<Pokemon> list = new ArrayList<>(userCollection);
-        list.sort(Comparator.comparing(Pokemon::getType1)); /*se ordena por tipo 1 */
-        return list;
+        List<Pokemon> collection = new ArrayList<>(userCollection);
+    
+        // Definir el orden deseado
+        List<String> typeOrder = Arrays.asList("Water", "Steel", "Rock", "Psychic", "Poison","Normal", "Ice", "Ground", "Grass", "Ghost","Flying", "Fire", "Fighting", "Fairy", "Electric", "Dragon", "Dark", "Bug" );
+    
+        // Ordenar según la lista predefinida
+        collection.sort(Comparator.comparing(p -> typeOrder.indexOf(p.getType1())));
+    
+        return collection;
     }
+    
+    
 }

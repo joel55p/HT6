@@ -34,7 +34,7 @@ public class Reader { /*servira para poder separar y obtener los datos para el M
             int generacion = Integer.parseInt(data[8]);
             boolean estatus_legendario = data[9].equalsIgnoreCase("Yes"); /*convierte a yes o no en bool */
 
-            // Crear el objeto Pokémon y agregarlo al mapa
+           /*se crea el pokemon y se agrega al podex, osea Mapa*/
             Pokemon pokemon = new Pokemon(name, podex, type1, type2, clasificacion, altura, peso, ability, generacion, estatus_legendario);
             pokedex.put(name, pokemon);
         }
