@@ -1,35 +1,32 @@
-import java.util.*; /*Para el MAP  y la elecci[on de JCF*/
-/*clase para poder como tal tener la coleccion propia del user de pokemones. */
-public class Guardar_Coleccion {
-    private List<String> userCollection;
+import java.util.*; /*para importar el uso de Map y list */
+
+public class Guardar_Coleccion { /*clase qeu va a servir para guardar una coleccion de Pokemones qeu el user eliga */
+    private List<Pokemon> userCollection; /*Lista de pokemones de coleccion del user */
     private Map<String, Pokemon> pokedex;
 
-    public Guardar_Coleccion(Map<String, Pokemon> pokedex) {
-        this.userCollection = new ArrayList<>(); /*se va  usar un array */
+    public Guardar_Coleccion(Map<String, Pokemon> pokedex) { /*Constructor */
+        this.userCollection = new ArrayList<>(); /*esta es la eleccion que se hizo de JCF */
         this.pokedex = pokedex;
     }
 
-
-    /*------- OPERACION 1 ------- */
-    public String Agregar_a_coleccion(String name) {
-        if (!pokedex.containsKey(name)) { /*ya esta hecha la logica por el JCF */
-            return"Error: El Pokémon no existe en los datos."; /*si es que no hay nombre que leer */
-    
+    /*-------- Operacion 1 -------- */
+    public boolean addPokemonToCollection(String name) {
+        if (!pokedex.containsKey(name)) { /*si es que no existe el nombre del pokemon en el csv */
+            throw new IllegalArgumentException("Error: El Pokémon no existe en los datos.");
         }
-        if (!userCollection.add(name)) {  /*ya esta hecha la logica por el JCF */
-            return "El Pokémon ya está en la colección.";
-        } else {
-            return "Pokémon agregado exitosamente.";
+        for (Pokemon p : userCollection) {
+            if (p.getName().equals(name)) { /*si ya encontro el pokemon en la coleccion  */
+                return false; // Indica que ya existe en la colección
+            }
         }
+        userCollection.add(pokedex.get(name)); /*se agrega al array */
+        return true;
     }
 
-    /*---------OPERACION 3 --------- */
+    /*------ Operacion 3------- */
     public List<Pokemon> getUserCollectionByType() {
-        List<Pokemon> list = new ArrayList<>();
-        for (String name : userCollection) {
-            list.add(pokedex.get(name));
-        }
-        list.sort(Comparator.comparing(Pokemon::getType1)); // Ordenar por Type1, ademas es necesario mencionar que no depende del index sino mas bien del nombre 
+        List<Pokemon> list = new ArrayList<>(userCollection);
+        list.sort(Comparator.comparing(Pokemon::getType1)); /*se ordena por tipo 1 */
         return list;
     }
 }
